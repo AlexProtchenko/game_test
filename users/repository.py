@@ -1,18 +1,5 @@
-import pymysql
-from config import host, user, password, db_name
+from connection import connect
 # from model import Users
-
-
-def connect():
-    connection = pymysql.connect(
-        host=host,
-        port=3306,
-        user=user,
-        password=password,
-        database=db_name,
-        cursorclass=pymysql.cursors.DictCursor
-    )
-    return connection
 
 
 class UsersRepository:
@@ -55,6 +42,6 @@ class UsersRepository:
 # g = UsersRepository()
 # g.delete(6)
 
-#   todo get
+  # todo get
 # g = UsersRepository()
 # print(g.get())
