@@ -52,15 +52,16 @@ class GamesRepository:
             return rows
 
     # todo add
-# game_repository = GamesRepository(connect())
-# name = 'a'
+
+
+# g = GamesRepository()
+# name = 'bg'
 # price = 1
 # rate = 1
 # studio = 1
 # game = Game(name, rate, price, studio)
-
-# game_repository.add(game)
-
+#
+# g.add(game)
 
 # todo delete
 # g = GamesRepository()

@@ -7,6 +7,7 @@ authors = ["AlexProtchenko <72452349+AlexProtchenko@users.noreply.github.com>"]
 [tool.poetry.dependencies]
 python = "^3.9"
 PyMySQL = "^1.0.2"
+Flask = "^2.0.1"
 
 [tool.poetry.dev-dependencies]
 
