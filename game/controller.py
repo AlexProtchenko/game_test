@@ -1,9 +1,9 @@
-from flask import jsonify, Flask, request
-from repository import GamesRepository
-from model import Game
+from flask import jsonify, Blueprint, request
+from game.repository import GamesRepository
+from game.model import Game
 
 
-game_controller_api = Flask(__name__)
+game_controller_api = Blueprint('game_controller_api', __name__)
 
 
 @game_controller_api.route('/api/games', methods=['GET'])
@@ -34,5 +34,4 @@ def delete_game(id):
     return 'ok'
 
 
-if __name__ == '__main__':
-    game_controller_api.run()
+
