@@ -34,4 +34,30 @@ def delete_game(id):
     return 'ok'
 
 
+@game_controller_api.route('/api/games/rate/<int:id>', methods=['PUT'])
+def put_rate(id):
+    request.method = 'PUT'
+    game_data = request.json
+    g = GamesRepository()
+    name = ''
+    price = 0
+    rate = game_data["rate"]
+    studio = 0
+    game = Game(name, rate, price, studio)
+    g.edit_rate(id, game)
+    return 'ok'
+
+
+@game_controller_api.route('/api/games/price/<int:id>', methods=['PUT'])
+def put_price(id):
+    request.method = 'PUT'
+    game_data = request.json
+    g = GamesRepository()
+    name = ''
+    price = game_data["price"]
+    rate = 0
+    studio = 0
+    game = Game(name, rate, price, studio)
+    g.edit_price(id, game)
+    return 'ok'
 
