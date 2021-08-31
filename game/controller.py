@@ -25,14 +25,14 @@ def post_game():
     studio = game_data["studio"]
     game = Game(name, rate, price, studio)
     g.add(game)
-    return 'OK', HTTPStatus.OK
+    return '', HTTPStatus.OK
 
 
 @game_controller_api.route('/api/games/<int:id>', methods=['DELETE'])
 def delete_game(id):
     g = GamesRepository()
     g.delete(id)
-    return 'OK', HTTPStatus.OK
+    return '', HTTPStatus.OK
 
 
 @game_controller_api.route('/api/games/rate/<int:id>', methods=['PUT'])
@@ -46,7 +46,7 @@ def put_rate(id):
     studio = 0
     game = Game(name, rate, price, studio)
     g.edit_rate(id, game)
-    return 'OK', HTTPStatus.OK
+    return '', HTTPStatus.OK
 
 
 @game_controller_api.route('/api/games/price/<int:id>', methods=['PUT'])
@@ -60,5 +60,5 @@ def put_price(id):
     studio = 0
     game = Game(name, rate, price, studio)
     g.edit_price(id, game)
-    return 'OK', HTTPStatus.OK
+    return '', HTTPStatus.OK
 
