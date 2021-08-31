@@ -1,6 +1,7 @@
 from flask import jsonify, Blueprint, request
 from game.repository import GamesRepository
 from game.model import Game
+from http import HTTPStatus
 
 
 game_controller_api = Blueprint('game_controller_api', __name__)
@@ -10,7 +11,7 @@ game_controller_api = Blueprint('game_controller_api', __name__)
 def get_games():
     g = GamesRepository()
     obj = g.get()
-    return jsonify(obj)
+    return jsonify(obj), HTTPStatus.OK
 
 
 @game_controller_api.route('/api/games/post', methods=['POST'])
@@ -24,14 +25,14 @@ def post_game():
     studio = game_data["studio"]
     game = Game(name, rate, price, studio)
     g.add(game)
-    return 'ok'
+    return 'OK', HTTPStatus.OK
 
 
 @game_controller_api.route('/api/games/<int:id>', methods=['DELETE'])
 def delete_game(id):
     g = GamesRepository()
     g.delete(id)
-    return 'ok'
+    return 'OK', HTTPStatus.OK
 
 
 @game_controller_api.route('/api/games/rate/<int:id>', methods=['PUT'])
@@ -45,7 +46,7 @@ def put_rate(id):
     studio = 0
     game = Game(name, rate, price, studio)
     g.edit_rate(id, game)
-    return 'ok'
+    return 'OK', HTTPStatus.OK
 
 
 @game_controller_api.route('/api/games/price/<int:id>', methods=['PUT'])
@@ -59,5 +60,5 @@ def put_price(id):
     studio = 0
     game = Game(name, rate, price, studio)
     g.edit_price(id, game)
-    return 'ok'
+    return 'OK', HTTPStatus.OK
 
