@@ -10,6 +10,7 @@ class UsersRepository:
         c = self.connection.cursor()
         request = "INSERT INTO users (nick) VALUES (%s);"
         val = user.nick
+        self.connection.ping()
         c.execute(request, val)
         self.connection.commit()
         c.close()
@@ -19,6 +20,7 @@ class UsersRepository:
         c = self.connection.cursor()
         request = "DELETE FROM users WHERE id = %s;"
         val = user_id
+        self.connection.ping()
         c.execute(request, val)
         self.connection.commit()
         c.close()
@@ -27,6 +29,7 @@ class UsersRepository:
     def get(self):
         with self.connection.cursor() as cursor:
             request = "SELECT * FROM users;"
+            self.connection.ping()
             cursor.execute(request)
             rows = cursor.fetchall()
             return rows

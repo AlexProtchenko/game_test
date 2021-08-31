@@ -1,18 +1,5 @@
-import pymysql
-from config import host, user, password, db_name
+from connection import connect
 # from model import UsersToGame
-
-
-def connect():
-    connection = pymysql.connect(
-        host=host,
-        port=3306,
-        user=user,
-        password=password,
-        database=db_name,
-        cursorclass=pymysql.cursors.DictCursor
-    )
-    return connection
 
 
 class UsersToGameRepository:
@@ -23,6 +10,7 @@ class UsersToGameRepository:
         c = self.connection.cursor()
         request = "INSERT INTO users_to_game (user_id, game_id) VALUES (%s, %s);"
         val = (user_to_game.user_id, user_to_game.game_id)
+        self.connection.ping()
         c.execute(request, val)
         self.connection.commit()
         c.close()
@@ -32,6 +20,7 @@ class UsersToGameRepository:
         c = self.connection.cursor()
         request = "DELETE FROM users_to_game WHERE id = %s;"
         val = user_to_game_id
+        self.connection.ping()
         c.execute(request, val)
         self.connection.commit()
         c.close()
@@ -40,6 +29,7 @@ class UsersToGameRepository:
     def get(self):
         with self.connection.cursor() as cursor:
             request = "SELECT * FROM users_to_game;"
+            self.connection.ping()
             cursor.execute(request)
             rows = cursor.fetchall()
             return rows
