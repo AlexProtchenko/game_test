@@ -12,3 +12,6 @@ def connect():
         cursorclass=pymysql.cursors.DictCursor
     )
     return connection
+
+
+

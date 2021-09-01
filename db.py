@@ -33,7 +33,7 @@ def load():
 
                 cursor.execute(create_table_query)
             with connection.cursor() as cursor:
-                create_table_query = "CREATE TABLE `user_to_game`(id int AUTO_INCREMENT PRIMARY KEY, " \
+                create_table_query = "CREATE TABLE `users_to_game`(id int AUTO_INCREMENT PRIMARY KEY, " \
                                      "user_id int NOT NULL," \
                                      "FOREIGN KEY (user_id) references users(id)," \
                                      "game_id int NOT NULL," \
@@ -44,3 +44,5 @@ def load():
             connection.close()
     except Exception as ex:
         print(ex)
+
+load()

@@ -61,4 +61,3 @@ def put_price(id):
     game = Game(name, rate, price, studio)
     g.edit_price(id, game)
     return '', HTTPStatus.OK
-
