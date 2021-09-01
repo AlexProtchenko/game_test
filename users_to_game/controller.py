@@ -31,3 +31,10 @@ def delete_utg(id):
     u = UsersToGameRepository()
     u.delete(id)
     return '', HTTPStatus.OK
+
+
+@utg_controller_api.route('/api/utg/user/<int:id>', methods=['GET'])
+def get_games(id):
+    u = UsersToGameRepository()
+    obj = u.get_games(id)
+    return jsonify(obj), HTTPStatus.OK

@@ -1,5 +1,4 @@
 from connection import connect
-# from model import Studio
 
 
 class StudioRepository:
@@ -33,18 +32,3 @@ class StudioRepository:
             cursor.execute(request)
             rows = cursor.fetchall()
             return rows
-
-    # todo add
-# g = StudioRepository()
-# name = 'testcode'
-# studio = Studio(name)
-# g.add(studio)
-
-
-# todo delete
-# g = StudioRepository()
-# g.delete(6)
-
-#   todo get
-# g = StudioRepository()
-# print(g.get())

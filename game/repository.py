@@ -1,5 +1,4 @@
 from connection import connect
-# from model import Game
 
 
 class GamesRepository:
@@ -55,43 +54,3 @@ class GamesRepository:
             cursor.execute(request)
             rows = cursor.fetchall()
             return rows
-
-    # todo add
-
-
-# g = GamesRepository()
-# name = 'bg'
-# price = 1
-# rate = 1
-# studio = 1
-# game = Game(name, rate, price, studio)
-#
-# g.add(game)
-
-# todo delete
-# g = GamesRepository()
-# g.delete(46)
-
-
-# todo rate
-# g = GamesRepository()
-# name = 'a'
-# price = 3
-# rate = 3
-# studio = 1
-# game = Game(name, rate, price, studio)
-# g.edit_rate(44, game)
-
-# todo rate
-# g = GamesRepository()
-# name = 'a'
-# price = 5
-# rate = 3
-# studio = 1
-# game = Game(name, rate, price, studio)
-# g.edit_price(44, game)
-
-
-#   todo get
-# g = GamesRepository()
-# print(g.get())

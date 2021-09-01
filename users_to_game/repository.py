@@ -1,5 +1,4 @@
 from connection import connect
-# from model import UsersToGame
 
 
 class UsersToGameRepository:
@@ -34,19 +33,11 @@ class UsersToGameRepository:
             rows = cursor.fetchall()
             return rows
 
-
-
-    # todo add
-# g = UsersToGameRepository()
-# user_id = 5
-# game_id = 44
-# user_to_game = UsersToGame(user_id, game_id)
-# g.add(user_to_game)
-
-# todo delete
-# g = UsersToGameRepository()
-# g.delete(4)
-
-#   todo get
-# g = UsersToGameRepository()
-# print(g.get())
+    def get_games(self, user_to_game_id):
+        with self.connection.cursor() as cursor:
+            request = "SELECT * FROM users_to_game WHERE user_id = %s;"
+            val = user_to_game_id
+            self.connection.ping()
+            cursor.execute(request, val)
+            rows = cursor.fetchall()
+            return rows

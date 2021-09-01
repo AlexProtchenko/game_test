@@ -44,8 +44,3 @@ def load():
             connection.close()
     except Exception as ex:
         print(ex)
-
-
-
-
-# load()

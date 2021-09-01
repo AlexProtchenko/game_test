@@ -1,5 +1,4 @@
 from connection import connect
-# from model import Users
 
 
 class UsersRepository:
@@ -33,18 +32,3 @@ class UsersRepository:
             cursor.execute(request)
             rows = cursor.fetchall()
             return rows
-
-
-    # todo add
-# g = UsersRepository()
-# nick = 'aaa'
-# user = Users(nick)
-# g.add(user)
-
-# todo delete
-# g = UsersRepository()
-# g.delete(6)
-
-  # todo get
-# g = UsersRepository()
-# print(g.get())
