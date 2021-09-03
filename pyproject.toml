@@ -8,6 +8,7 @@ authors = ["AlexProtchenko <72452349+AlexProtchenko@users.noreply.github.com>"]
 python = "^3.9"
 PyMySQL = "^1.0.2"
 Flask = "^2.0.1"
+SQLAlchemy = "^1.4.23"
 
 [tool.poetry.dev-dependencies]
 

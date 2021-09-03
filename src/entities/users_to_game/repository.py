@@ -1,4 +1,4 @@
-from connection import connect
+from src.connection import connect
 
 
 class UsersToGameRepository:

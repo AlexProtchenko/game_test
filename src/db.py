@@ -1,5 +1,5 @@
 import pymysql
-from config import host, user, password, db_name
+from src.config import host, user, password, db_name
 
 
 def load():
@@ -44,5 +44,6 @@ def load():
             connection.close()
     except Exception as ex:
         print(ex)
+
 
 load()

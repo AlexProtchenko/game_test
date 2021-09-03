@@ -1,8 +1,8 @@
 from flask import jsonify, Blueprint, request
-from users_to_game.repository import UsersToGameRepository
-from users_to_game.model import UsersToGame
 from http import HTTPStatus
 
+from src.entities.users_to_game.model import UsersToGame
+from src.entities.users_to_game.repository import UsersToGameRepository
 
 utg_controller_api = Blueprint('utg_controller_api', __name__)
 

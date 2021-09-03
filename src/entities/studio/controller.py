@@ -1,7 +1,8 @@
 from flask import jsonify, Blueprint, request
-from studio.repository import StudioRepository
-from studio.model import Studio
 from http import HTTPStatus
+
+from src.entities.studio.model import Studio
+from src.entities.studio.repository import StudioRepository
 
 studio_controller_api = Blueprint('studio_controller_api', __name__)
 

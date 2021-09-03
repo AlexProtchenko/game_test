@@ -1,8 +1,8 @@
 from flask import jsonify, Blueprint, request
-from users.repository import UsersRepository
-from users.model import Users
 from http import HTTPStatus
 
+from src.entities.users.model import Users
+from src.entities.users.repository import UsersRepository
 
 user_controller_api = Blueprint('user_controller_api', __name__)
 
@@ -26,7 +26,7 @@ def post_user():
 
 
 @user_controller_api.route('/api/users/<int:id>', methods=['DELETE'])
-def delete_user(id):
+def delete_user(_id):
     u = UsersRepository()
-    u.delete(id)
+    u.delete(_id)
     return '', HTTPStatus.OK
