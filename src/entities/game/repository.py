@@ -1,56 +1,59 @@
-from src.connection import connect
+from sqlalchemy import MetaData, Table, Column, Integer, VARCHAR, Float, ForeignKey
+
+from src.entities.game.model import Game
+from src.sql_config import SqlConfig
 
 
-class GamesRepository:
+GAMES: Table
 
-    def __init__(self, connection=connect()):
-        self.connection = connection
 
-    def add(self, game):
-        c = self.connection.cursor()
-        request = "INSERT INTO games (name, rate, price, studio)" \
-                  " VALUES (%s, %s, %s, %s);"
-        val = (game.name, game.rate, game.price, game.studio)
-        self.connection.ping()
-        c.execute(request, val)
-        self.connection.commit()
-        c.close()
-        self.connection.close()
+def describe_table(metadata: MetaData) -> Table:
+    return Table(
+        "games",
+        metadata,
+        Column("id", Integer, primary_key=True, autoincrement=True),
+        Column("name", VARCHAR(100), nullable=False),
+        Column("rate", Float, nullable=False),
+        Column("price", Float, nullable=False),
+        Column("studio", Float, nullable=False)  # Foreign Key Studio ID
+    )
+
+
+class GamesRepository:  # todo create rep and init into app.py
+    def __init__(self, sql_config: SqlConfig):
+        global GAMES
+        GAMES = describe_table(sql_config.metadata)
+
+        self.engine = sql_config.engine
+
+    def add(self, game: Game):
+        statement = GAMES.insert().values(
+            name=game.name,
+            rate=game.rate,
+            price=game.price,
+            studio=game.studio
+        )
+        with self.engine.begin() as connection:
+            connection.execute(statement)
 
     def delete(self, game_id):
-        c = self.connection.cursor()
-        request = "DELETE FROM games WHERE id = %s;"
-        val = game_id
-        self.connection.ping()
-        c.execute(request, val)
-        self.connection.commit()
-        c.close()
-        self.connection.close()
-
-    def edit_rate(self, game_id, game):
-        request = "UPDATE games SET rate = %s WHERE id = %s;"
-        c = self.connection.cursor()
-        val = (game.rate, game_id)
-        self.connection.ping()
-        c.execute(request, val)
-        self.connection.commit()
-        c.close()
-        self.connection.close()
-
-    def edit_price(self, game_id, game):
-        request = "UPDATE games SET price = %s WHERE id = %s;"
-        c = self.connection.cursor()
-        val = (game.price, game_id)
-        self.connection.ping()
-        c.execute(request, val)
-        self.connection.commit()
-        c.close()
-        self.connection.close()
+        statement = GAMES.delete().where(
+            GAMES.c.id == game_id
+        )
+        with self.engine.begin() as connection:
+            connection.execute(statement)
 
     def get(self):
-        with self.connection.cursor() as cursor:
-            request = "SELECT * FROM games;"
-            self.connection.ping()
-            cursor.execute(request)
-            rows = cursor.fetchall()
-            return rows
+        statement = GAMES.select()
+
+        with self.engine.begin() as connection:
+            connection.execute(statement)
+
+    def _row_to_game(self, row) -> Game:
+        return Game(
+            name=row.name,
+            # continue ...
+        )
+
+# todo add return
+# todo self._rows_to_game():
