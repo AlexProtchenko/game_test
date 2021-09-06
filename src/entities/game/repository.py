@@ -47,7 +47,9 @@ class GamesRepository:  # todo create rep and init into app.py
         statement = GAMES.select()
 
         with self.engine.begin() as connection:
-            connection.execute(statement)
+            rows = connection.execute(statement).all()
+
+        return [row.name for row in rows]
 
     def _row_to_game(self, row) -> Game:
         return Game(
